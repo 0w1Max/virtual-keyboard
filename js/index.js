@@ -14,6 +14,40 @@ const KEYS_RUS = [
   ['Ctrl', 'Win', 'Alt', '', 'Alt', '←', '↓', '→', 'Ctrl'],
 ];
 
+const body = document.querySelector('body');
+
+const createKey = (element, key) => {
+  const elementKey = document.createElement('div');
+  const elementKeyText = document.createElement('span');
+
+  elementKey.classList.add('keyboard__key');
+  elementKeyText.textContent = key;
+
+  element.insertAdjacentElement('beforeend', elementKey);
+  elementKey.insertAdjacentElement('beforeend', elementKeyText);
+};
+
+const createKeyboard = (lang) => {
+  const elementContainer = document.createElement('div');
+  const elementKeyboard = document.createElement('div');
+
+  elementContainer.classList.add('container');
+  elementKeyboard.classList.add('keyboard');
+
+  body.insertAdjacentElement('beforeend', elementContainer);
+  elementContainer.insertAdjacentElement('beforeend', elementKeyboard);
+
+  lang.forEach((arr) => {
+    const elementKeyboardRow = document.createElement('div');
+    elementKeyboardRow.classList.add('keyboard__row');
+    elementKeyboard.insertAdjacentElement('beforeend', elementKeyboardRow);
+
+    arr.forEach((key) => createKey(elementKeyboardRow, key));
+  });
+};
+
+createKeyboard(KEYS_ENG);
+
 // const body = document.querySelector('body');
 // const keyboard = document.querySelector('.keyboard');
 // const keys = keyboard.querySelectorAll('.keyboard__key > span');
