@@ -115,3 +115,21 @@ const createKeyboard = (lang) => {
 };
 
 createKeyboard(KEYS_ENG.lowerCase);
+
+const activateCapsLock = () => {
+  const keyCapsLock = document.querySelector('.keyboard__key_caps-lock');
+
+  keyCapsLock.addEventListener('click', () => {
+    body.innerHTML = '';
+
+    if (keyCapsLock.classList.contains('active')) {
+      createKeyboard(KEYS_ENG.lowerCase);
+      document.querySelector('.keyboard__key_caps-lock').classList.toggle('active');
+    } else {
+      createKeyboard(KEYS_ENG.upperCase);
+      document.querySelector('.keyboard__key_caps-lock').classList.toggle('active');
+    }
+  });
+};
+
+activateCapsLock();

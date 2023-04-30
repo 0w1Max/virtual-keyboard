@@ -82,3 +82,16 @@ body {
 .keyboard__key_left {
   background-color: #1e2b34;
 }
+
+.keyboard__key_caps-lock::after {
+  content: '';
+  width: 6px;
+  height: 6px;
+  margin-left: 10px;
+  background-color: #ccc;
+  border-radius: 10px;
+}
+
+.keyboard__key_caps-lock.active::after {
+  background-color: rgb(15, 175, 0);
+}
