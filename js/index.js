@@ -78,12 +78,17 @@ const createKey = (element, key) => {
 
 const createKeyboard = (lang) => {
   const elementContainer = document.createElement('div');
+  const elementOutput = document.createElement('textarea');
   const elementKeyboard = document.createElement('div');
 
   elementContainer.classList.add('container');
+  elementOutput.classList.add('output-text');
   elementKeyboard.classList.add('keyboard');
 
+  elementOutput.value = '_';
+
   body.insertAdjacentElement('beforebegin', elementContainer);
+  elementContainer.insertAdjacentElement('beforeend', elementOutput);
   elementContainer.insertAdjacentElement('beforeend', elementKeyboard);
 
   lang.forEach((arr) => {
