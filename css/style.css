@@ -57,6 +57,7 @@ body {
   align-items: center;
   width: 100%;
   height: 100%;
+  border-radius: 6px;
 }
 
 .keyboard__key:hover {
@@ -102,6 +103,10 @@ body {
 
 .keyboard__key_caps-lock.active::after {
   background-color: rgb(15, 175, 0);
+}
+
+.keyboard__key > span.active {
+  background-color: #000;
 }
 
 .keyboard__key_caps-lock.active,

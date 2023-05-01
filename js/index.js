@@ -118,8 +118,18 @@ const textInput = () => {
   const output = document.querySelector('.output-text');
   const keyText = [...document.querySelectorAll('.keyboard__key_main > span')];
 
-  document.addEventListener('keydown', () => {
-    output.focus();
+  document.addEventListener('keydown', (evt) => {
+    keyText.forEach((key) => {
+      const keyName = evt.key;
+
+      output.focus();
+
+      if (keyName === key.textContent) {
+        key.classList.add('active');
+
+        document.addEventListener('keyup', () => key.classList.remove('active'));
+      }
+    });
   });
 
   keyText.forEach((key) => {
