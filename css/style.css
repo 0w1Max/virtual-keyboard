@@ -95,3 +95,8 @@ body {
 .keyboard__key_caps-lock.active::after {
   background-color: rgb(15, 175, 0);
 }
+
+.keyboard__key_caps-lock.active,
+.keyboard__key_shift.active {
+  background-color: #000;
+}
