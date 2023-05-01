@@ -105,6 +105,8 @@ body {
 }
 
 .keyboard__key_caps-lock.active,
-.keyboard__key_shift.active {
+.keyboard__key_shift.active,
+.keyboard__key_ctrl.active,
+.keyboard__key_alt.active {
   background-color: #000;
 }
