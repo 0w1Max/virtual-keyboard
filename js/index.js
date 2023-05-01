@@ -52,7 +52,7 @@ const activateShift = () => {
         keyShift.forEach((key) => key.classList.remove('active'));
         isActive = false;
       } else {
-        replaceAllKeys(KEYS_ENG.upperCase, keyText, shift);
+        replaceAllKeys(KEYS_ENG.shift, keyText, shift);
         keyShift.forEach((key) => key.classList.add('active'));
         isActive = true;
       }
