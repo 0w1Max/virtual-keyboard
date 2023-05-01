@@ -2,7 +2,7 @@ import { KEYS_ENG, KEYS_RUS, KEYS_CLASS } from './data.js';
 import { addKeyText, createKeyboard } from './create-keyboard.js';
 
 // const body = document.querySelector('body');
-let currentLang = KEYS_ENG.lowerCase;
+let currentLang = KEYS_ENG;
 let isActiveCapsLock = false;
 let isActiveShift = false;
 let isActiveCtrl = false;
@@ -34,10 +34,10 @@ const activateCapsLock = () => {
 
   keyCapsLock.addEventListener('click', () => {
     if (isActiveCapsLock === true) {
-      replaceAllKeys(KEYS_ENG.lowerCase, keyText, keyCapsLock);
+      replaceAllKeys(currentLang.lowerCase, keyText, keyCapsLock);
       isActiveCapsLock = false;
     } else {
-      replaceAllKeys(KEYS_ENG.upperCase, keyText, keyCapsLock);
+      replaceAllKeys(currentLang.upperCase, keyText, keyCapsLock);
       isActiveCapsLock = true;
     }
   });
@@ -50,16 +50,16 @@ const activateShift = () => {
   keyShift.forEach((shift) => {
     shift.addEventListener('click', () => {
       if (isActiveShift === true) {
-        replaceAllKeys(KEYS_ENG.lowerCase, keyText, shift);
+        replaceAllKeys(currentLang.lowerCase, keyText, shift);
         keyShift.forEach((key) => key.classList.remove('active'));
         isActiveShift = false;
       } else {
-        replaceAllKeys(KEYS_ENG.shift, keyText, shift);
+        replaceAllKeys(currentLang.shift, keyText, shift);
         keyShift.forEach((key) => key.classList.add('active'));
         isActiveShift = true;
 
         setTimeout(() => {
-          replaceAllKeys(KEYS_ENG.lowerCase, keyText, shift);
+          replaceAllKeys(currentLang.lowerCase, keyText, shift);
           keyShift.forEach((key) => key.classList.remove('active'));
           isActiveShift = false;
         }, 1500);
@@ -68,28 +68,43 @@ const activateShift = () => {
   });
 };
 
+const changeCurrentLang = () => {
+  switch (currentLang) {
+    case KEYS_ENG:
+      currentLang = KEYS_RUS;
+      break;
+    case KEYS_RUS:
+      currentLang = KEYS_ENG;
+      break;
+    default:
+      currentLang = KEYS_ENG;
+  }
+
+  return currentLang;
+};
+
 const changeLang = () => {
   const keyText = [...document.querySelectorAll('.keyboard__key > span')];
-  const keyCtrl = document.querySelectorAll('.keyboard__key_ctrl');
-  const keyAlt = document.querySelectorAll('.keyboard__key_alt');
+  const keyCapsLock = document.querySelector('.keyboard__key_caps-lock');
+  const keyCtrl = [...document.querySelectorAll('.keyboard__key_ctrl')][0];
+  const keyAlt = [...document.querySelectorAll('.keyboard__key_alt')][0];
 
-  keyCtrl.forEach((ctrl) => {
-    keyAlt.forEach((alt) => {
-      ctrl.addEventListener('click', () => {
-        if (isActiveCtrl === true) {
-          isActiveCtrl = false;
-        } else {
-          isActiveCtrl = true;
-          ctrl.classList.toggle('active');
+  keyCtrl.addEventListener('click', () => {
+    if (isActiveCtrl === true) {
+      isActiveCtrl = false;
+    } else {
+      isActiveCtrl = true;
+      keyCtrl.classList.toggle('active');
 
-          alt.addEventListener('click', () => {
-            alt.classList.toggle('active');
-            replaceAllKeys(KEYS_RUS.lowerCase, keyText, alt);
-            ctrl.classList.remove('active');
-          });
-        }
+      keyAlt.addEventListener('click', () => {
+        keyAlt.classList.toggle('active');
+        replaceAllKeys(changeCurrentLang().lowerCase, keyText, keyAlt);
+        isActiveCapsLock = false;
+        isActiveCtrl = false;
+        keyCapsLock.classList.remove('active');
+        keyCtrl.classList.remove('active');
       });
-    });
+    }
   });
 };
 
