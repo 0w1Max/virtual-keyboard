@@ -1,4 +1,4 @@
-import { KEYS_ENG, KEYS_RUS, KEYS_CLASS } from './data.js';
+import { KEYS_CLASS } from './data.js';
 
 const body = document.querySelector('body');
 
