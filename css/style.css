@@ -51,6 +51,15 @@ body {
   cursor: pointer;
 }
 
+.keyboard__key > span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+}
+
 .keyboard__key:hover {
   background-color: #000;
 }
@@ -81,4 +90,28 @@ body {
 .keyboard__key_down,
 .keyboard__key_left {
   background-color: #1e2b34;
+}
+
+.keyboard__key_caps-lock::after {
+  content: '';
+  width: 7px;
+  height: 6px;
+  margin-right: 14px;
+  background-color: #ccc;
+  border-radius: 10px;
+}
+
+.keyboard__key_caps-lock.active::after {
+  background-color: rgb(15, 175, 0);
+}
+
+.keyboard__key > span.active {
+  background-color: #000;
+}
+
+.keyboard__key_caps-lock.active,
+.keyboard__key_shift.active,
+.keyboard__key_ctrl.active,
+.keyboard__key_alt.active {
+  background-color: #000;
 }

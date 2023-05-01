@@ -1,104 +1,142 @@
-const KEYS_ENG = {
-  lowerCase: [
-    ['`', 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, '-', '=', 'Backspace'],
-    ['Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\', 'Del'],
-    ['Caps Lock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', 'Enter'],
-    ['Shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', '↑', 'Shift'],
-    ['Ctrl', 'Win', 'Alt', '', 'Alt', '←', '↓', '→', 'Ctrl'],
-  ],
-  upperCase: [
-    ['`', 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, '-', '=', 'Backspace'],
-    ['Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\', 'Del'],
-    ['Caps Lock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', 'Enter'],
-    ['Shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', '↑', 'Shift'],
-    ['Ctrl', 'Win', 'Alt', '', 'Alt', '←', '↓', '→', 'Ctrl'],
-  ],
-};
+import { KEYS_ENG, KEYS_RUS, KEYS_CLASS } from './data.js';
+import { addKeyText, createKeyboard } from './create-keyboard.js';
 
-const KEYS_RUS = {
-  lowerCase: [
-    ['ё', 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, '-', '=', 'Backspace'],
-    ['Tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '\\', 'Del'],
-    ['Caps Lock', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'д', 'ж', 'э', 'Enter'],
-    ['Shift', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.', '↑', 'Shift'],
-    ['Ctrl', 'Win', 'Alt', '', 'Alt', '←', '↓', '→', 'Ctrl'],
-  ],
-  upperCase: [
-    ['ё', 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, '-', '=', 'Backspace'],
-    ['Tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '\\', 'Del'],
-    ['Caps Lock', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'д', 'ж', 'э', 'Enter'],
-    ['Shift', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.', '↑', 'Shift'],
-    ['Ctrl', 'Win', 'Alt', '', 'Alt', '←', '↓', '→', 'Ctrl'],
-  ],
-};
-
-const KEYS_CLASS = ['Backspace', 'Tab', 'Del', 'Caps Lock', 'Enter', 'Shift', 'Ctrl', 'Win', 'Alt'];
-
-const body = document.querySelector('body');
-
-const createKey = (element, key) => {
-  const elementKey = document.createElement('div');
-  const elementKeyText = document.createElement('span');
-
-  elementKey.classList.add('keyboard__key');
-
-  if (KEYS_CLASS.includes(key)) {
-    if (key === 'Caps Lock') {
-      elementKey.classList.add('keyboard__key_caps-lock');
-    } else {
-      elementKey.classList.add(`keyboard__key_${key.toLowerCase()}`);
-    }
-  }
-
-  if (key === '') {
-    elementKey.classList.add('keyboard__key_space');
-  }
-
-  if (key === '↑') {
-    elementKey.classList.add('keyboard__key_up');
-  }
-
-  if (key === '→') {
-    elementKey.classList.add('keyboard__key_right');
-  }
-
-  if (key === '↓') {
-    elementKey.classList.add('keyboard__key_down');
-  }
-
-  if (key === '←') {
-    elementKey.classList.add('keyboard__key_left');
-  }
-
-  elementKeyText.textContent = key;
-
-  element.insertAdjacentElement('beforeend', elementKey);
-  elementKey.insertAdjacentElement('beforeend', elementKeyText);
-};
-
-const createKeyboard = (lang) => {
-  const elementContainer = document.createElement('div');
-  const elementKeyboard = document.createElement('div');
-
-  elementContainer.classList.add('container');
-  elementKeyboard.classList.add('keyboard');
-
-  body.insertAdjacentElement('beforebegin', elementContainer);
-  elementContainer.insertAdjacentElement('beforeend', elementKeyboard);
-
-  lang.forEach((arr) => {
-    const elementKeyboardRow = document.createElement('div');
-    elementKeyboardRow.classList.add('keyboard__row');
-    elementKeyboard.insertAdjacentElement('beforeend', elementKeyboardRow);
-
-    arr.forEach((key) => createKey(elementKeyboardRow, key));
-  });
-};
+// const body = document.querySelector('body');
+let currentLang = KEYS_ENG;
+let isActiveCapsLock = false;
+let isActiveShift = false;
+let isActiveCtrl = false;
 
 createKeyboard(KEYS_ENG.lowerCase);
 
-// const body = document.querySelector('body');
-// const keyboard = document.querySelector('.keyboard');
-// const keys = keyboard.querySelectorAll('.keyboard__key > span');
+const getAllKeys = (keys) => {
+  const result = [];
+  keys.forEach((arr) => {
+    result.push(...arr);
+  });
 
-// keys.forEach((key) => key.addEventListener('click', (evt) => console.log(evt.target)));
+  return result;
+};
+
+const replaceAllKeys = (keys, element, keySelector) => {
+  const arr = getAllKeys(keys);
+
+  element.forEach((el, index) => {
+    addKeyText(el, arr[index]);
+  });
+
+  keySelector.classList.toggle('active');
+};
+
+const activateCapsLock = () => {
+  const keyText = [...document.querySelectorAll('.keyboard__key > span')];
+  const keyCapsLock = document.querySelector('.keyboard__key_caps-lock');
+
+  keyCapsLock.addEventListener('click', () => {
+    if (isActiveCapsLock === true) {
+      replaceAllKeys(currentLang.lowerCase, keyText, keyCapsLock);
+      isActiveCapsLock = false;
+    } else {
+      replaceAllKeys(currentLang.upperCase, keyText, keyCapsLock);
+      isActiveCapsLock = true;
+    }
+  });
+};
+
+const activateShift = () => {
+  const keyText = [...document.querySelectorAll('.keyboard__key > span')];
+  const keyShift = document.querySelectorAll('.keyboard__key_shift');
+
+  keyShift.forEach((shift) => {
+    shift.addEventListener('click', () => {
+      if (isActiveShift === true) {
+        replaceAllKeys(currentLang.lowerCase, keyText, shift);
+        keyShift.forEach((key) => key.classList.remove('active'));
+        isActiveShift = false;
+      } else {
+        replaceAllKeys(currentLang.shift, keyText, shift);
+        keyShift.forEach((key) => key.classList.add('active'));
+        isActiveShift = true;
+
+        setTimeout(() => {
+          replaceAllKeys(currentLang.lowerCase, keyText, shift);
+          keyShift.forEach((key) => key.classList.remove('active'));
+          isActiveShift = false;
+        }, 1500);
+      }
+    });
+  });
+};
+
+const changeCurrentLang = () => {
+  switch (currentLang) {
+    case KEYS_ENG:
+      currentLang = KEYS_RUS;
+      console.log('KEYS_ENG -> KEYS_RUS');
+      break;
+    case KEYS_RUS:
+      currentLang = KEYS_ENG;
+      console.log('KEYS_RUS -> KEYS_ENG');
+      break;
+    default:
+      currentLang = KEYS_ENG;
+  }
+
+  return currentLang;
+};
+
+const changeLang = () => {
+  const keyText = [...document.querySelectorAll('.keyboard__key > span')];
+  const keyCapsLock = document.querySelector('.keyboard__key_caps-lock');
+  const keyCtrl = [...document.querySelectorAll('.keyboard__key_ctrl')][0];
+  const keyAlt = [...document.querySelectorAll('.keyboard__key_alt')][0];
+
+  keyCtrl.addEventListener('click', () => {
+    if (isActiveCtrl === true) {
+      isActiveCtrl = false;
+    } else {
+      isActiveCtrl = true;
+      keyCtrl.classList.toggle('active');
+
+      keyAlt.addEventListener('click', () => {
+        keyAlt.classList.toggle('active');
+        replaceAllKeys(changeCurrentLang().lowerCase, keyText, keyAlt);
+        isActiveCapsLock = false;
+        isActiveCtrl = false;
+        keyCapsLock.classList.remove('active');
+        keyCtrl.classList.remove('active');
+      });
+    }
+  });
+};
+
+activateCapsLock();
+activateShift();
+changeLang();
+
+const textInput = () => {
+  const output = document.querySelector('.output-text');
+  const keyText = [...document.querySelectorAll('.keyboard__key_main > span')];
+
+  document.addEventListener('keydown', (evt) => {
+    keyText.forEach((key) => {
+      const keyName = evt.key;
+
+      output.focus();
+
+      if (keyName === key.textContent) {
+        key.classList.add('active');
+
+        document.addEventListener('keyup', () => key.classList.remove('active'));
+      }
+    });
+  });
+
+  keyText.forEach((key) => {
+    key.addEventListener('click', () => {
+      output.value += key.textContent;
+    });
+  });
+};
+
+textInput();
