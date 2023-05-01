@@ -72,9 +72,11 @@ const changeCurrentLang = () => {
   switch (currentLang) {
     case KEYS_ENG:
       currentLang = KEYS_RUS;
+      console.log('KEYS_ENG -> KEYS_RUS');
       break;
     case KEYS_RUS:
       currentLang = KEYS_ENG;
+      console.log('KEYS_RUS -> KEYS_ENG');
       break;
     default:
       currentLang = KEYS_ENG;
