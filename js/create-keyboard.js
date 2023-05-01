@@ -12,33 +12,40 @@ const createKey = (element, key) => {
   const elementKeyText = document.createElement('span');
 
   elementKey.classList.add('keyboard__key');
+  elementKey.classList.add('keyboard__key_main');
 
   if (KEYS_CLASS.includes(key)) {
     if (key === 'Caps Lock') {
       elementKey.classList.add('keyboard__key_caps-lock');
+      elementKey.classList.remove('keyboard__key_main');
     } else {
       elementKey.classList.add(`keyboard__key_${key.toLowerCase()}`);
+      elementKey.classList.remove('keyboard__key_main');
     }
   }
 
-  if (key === '') {
+  if (key === ' ') {
     elementKey.classList.add('keyboard__key_space');
   }
 
   if (key === '↑') {
     elementKey.classList.add('keyboard__key_up');
+    elementKey.classList.remove('keyboard__key_main');
   }
 
   if (key === '→') {
     elementKey.classList.add('keyboard__key_right');
+    elementKey.classList.remove('keyboard__key_main');
   }
 
   if (key === '↓') {
     elementKey.classList.add('keyboard__key_down');
+    elementKey.classList.remove('keyboard__key_main');
   }
 
   if (key === '←') {
     elementKey.classList.add('keyboard__key_left');
+    elementKey.classList.remove('keyboard__key_main');
   }
 
   addKeyText(elementKeyText, key);

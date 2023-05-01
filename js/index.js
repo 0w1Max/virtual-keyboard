@@ -62,3 +62,20 @@ const activateShift = () => {
 
 activateCapsLock();
 activateShift();
+
+const textInput = () => {
+  const output = document.querySelector('.output-text');
+  const keyText = [...document.querySelectorAll('.keyboard__key_main > span')];
+
+  document.addEventListener('keydown', () => {
+    output.focus();
+  });
+
+  keyText.forEach((key) => {
+    key.addEventListener('click', () => {
+      output.value += key.textContent;
+    });
+  });
+};
+
+textInput();

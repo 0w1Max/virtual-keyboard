@@ -51,6 +51,14 @@ body {
   cursor: pointer;
 }
 
+.keyboard__key > span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
 .keyboard__key:hover {
   background-color: #000;
 }
