@@ -93,9 +93,9 @@ body {
 
 .keyboard__key_caps-lock::after {
   content: '';
-  width: 6px;
+  width: 7px;
   height: 6px;
-  margin-left: 10px;
+  margin-right: 14px;
   background-color: #ccc;
   border-radius: 10px;
 }
