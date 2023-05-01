@@ -50,6 +50,11 @@ const KEYS_CLASS = ['Backspace', 'Tab', 'Del', 'Caps Lock', 'Enter', 'Shift', 'C
 
 const body = document.querySelector('body');
 
+const addKeyText = (element, key) => {
+  const theElement = element;
+  theElement.textContent = key;
+};
+
 const createKey = (element, key) => {
   const elementKey = document.createElement('div');
   const elementKeyText = document.createElement('span');
@@ -84,7 +89,7 @@ const createKey = (element, key) => {
     elementKey.classList.add('keyboard__key_left');
   }
 
-  elementKeyText.textContent = key;
+  addKeyText(elementKeyText, key);
 
   element.insertAdjacentElement('beforeend', elementKey);
   elementKey.insertAdjacentElement('beforeend', elementKeyText);
@@ -116,18 +121,34 @@ const createKeyboard = (lang) => {
 
 createKeyboard(KEYS_ENG.lowerCase);
 
+const getAllKeys = (keys) => {
+  const result = [];
+  keys.forEach((arr) => {
+    result.push(...arr);
+  });
+
+  return result;
+};
+
+const replaceAllKeys = (keys, element) => {
+  const arr = getAllKeys(keys);
+
+  element.forEach((el, index) => {
+    addKeyText(el, arr[index]);
+  });
+
+  document.querySelector('.keyboard__key_caps-lock').classList.toggle('active');
+};
+
 const activateCapsLock = () => {
+  const keyText = [...document.querySelectorAll('.keyboard__key > span')];
   const keyCapsLock = document.querySelector('.keyboard__key_caps-lock');
 
   keyCapsLock.addEventListener('click', () => {
-    body.innerHTML = '';
-
     if (keyCapsLock.classList.contains('active')) {
-      createKeyboard(KEYS_ENG.lowerCase);
-      document.querySelector('.keyboard__key_caps-lock').classList.toggle('active');
+      replaceAllKeys(KEYS_ENG.lowerCase, keyText);
     } else {
-      createKeyboard(KEYS_ENG.upperCase);
-      document.querySelector('.keyboard__key_caps-lock').classList.toggle('active');
+      replaceAllKeys(KEYS_ENG.upperCase, keyText);
     }
   });
 };
