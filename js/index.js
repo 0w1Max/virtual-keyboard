@@ -99,7 +99,7 @@ const createKeyboard = (lang) => {
   elementOutput.classList.add('output-text');
   elementKeyboard.classList.add('keyboard');
 
-  elementOutput.value = '_';
+  elementOutput.placeholder = '_';
 
   body.insertAdjacentElement('afterbegin', elementContainer);
   elementContainer.insertAdjacentElement('beforeend', elementOutput);
