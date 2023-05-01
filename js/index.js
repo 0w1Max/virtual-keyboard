@@ -55,6 +55,12 @@ const activateShift = () => {
         replaceAllKeys(KEYS_ENG.shift, keyText, shift);
         keyShift.forEach((key) => key.classList.add('active'));
         isActive = true;
+
+        setTimeout(() => {
+          replaceAllKeys(KEYS_ENG.lowerCase, keyText, shift);
+          keyShift.forEach((key) => key.classList.remove('active'));
+          isActive = false;
+        }, 1500);
       }
     });
   });
