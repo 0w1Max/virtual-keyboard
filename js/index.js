@@ -143,4 +143,15 @@ const textInput = () => {
   });
 };
 
+const textRemove = () => {
+  const output = document.querySelector('.output-text');
+  const keyBackspace = document.querySelector('.keyboard__key_backspace');
+
+  keyBackspace.addEventListener('click', () => {
+    const text = document.querySelector('.output-text').value;
+    output.value = text.substr(0, text.length - 1);
+  });
+};
+
 textInput();
+textRemove();
