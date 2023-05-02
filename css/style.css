@@ -115,3 +115,7 @@ body {
 .keyboard__key_alt.active {
   background-color: #000;
 }
+
+.info__text {
+  font-size: 18px;
+}
