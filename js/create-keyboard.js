@@ -60,16 +60,23 @@ const createKeyboard = (lang) => {
   const elementContainer = document.createElement('div');
   const elementOutput = document.createElement('textarea');
   const elementKeyboard = document.createElement('div');
+  const elementInfo = document.createElement('div');
+  const elementInfoText = document.createElement('p');
 
   elementContainer.classList.add('container');
   elementOutput.classList.add('output-text');
   elementKeyboard.classList.add('keyboard');
+  elementInfo.classList.add('info');
+  elementInfoText.classList.add('info__text');
 
   elementOutput.placeholder = '_';
+  elementInfoText.textContent = 'Клавиатура создана в операционной системе Windows 8.1. Для переключения языка комбинация: левыe ctrl + alt.';
 
   body.insertAdjacentElement('afterbegin', elementContainer);
   elementContainer.insertAdjacentElement('beforeend', elementOutput);
   elementContainer.insertAdjacentElement('beforeend', elementKeyboard);
+  elementContainer.insertAdjacentElement('beforeend', elementInfo);
+  elementInfo.insertAdjacentElement('beforeend', elementInfoText);
 
   lang.forEach((arr) => {
     const elementKeyboardRow = document.createElement('div');
