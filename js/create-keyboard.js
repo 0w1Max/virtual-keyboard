@@ -32,21 +32,25 @@ const createKey = (element, key) => {
 
   if (key === '↑') {
     elementKey.classList.add('keyboard__key_special');
+    elementKey.classList.add('keyboard__key_arrow');
     elementKey.classList.add('keyboard__key_up');
   }
 
   if (key === '→') {
     elementKey.classList.add('keyboard__key_special');
+    elementKey.classList.add('keyboard__key_arrow');
     elementKey.classList.add('keyboard__key_right');
   }
 
   if (key === '↓') {
     elementKey.classList.add('keyboard__key_special');
+    elementKey.classList.add('keyboard__key_arrow');
     elementKey.classList.add('keyboard__key_down');
   }
 
   if (key === '←') {
     elementKey.classList.add('keyboard__key_special');
+    elementKey.classList.add('keyboard__key_arrow');
     elementKey.classList.add('keyboard__key_left');
   }
 
