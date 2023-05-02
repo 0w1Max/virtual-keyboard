@@ -153,5 +153,25 @@ const textRemove = () => {
   });
 };
 
+const clickEnter = () => {
+  const output = document.querySelector('.output-text');
+  const keyEnter = document.querySelector('.keyboard__key_enter');
+
+  keyEnter.addEventListener('click', () => {
+    output.value += '\n';
+  });
+};
+
+const clickTab = () => {
+  const output = document.querySelector('.output-text');
+  const keyTab = document.querySelector('.keyboard__key_tab');
+
+  keyTab.addEventListener('click', () => {
+    output.value += '\u0009';
+  });
+};
+
 textInput();
 textRemove();
+clickEnter();
+clickTab();
