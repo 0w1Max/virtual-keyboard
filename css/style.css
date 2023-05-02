@@ -49,6 +49,7 @@ body {
   background-color: #3e596c;
   border-radius: 6px;
   cursor: pointer;
+  transition: all 0.9s;
 }
 
 .keyboard__key > span {
@@ -58,10 +59,13 @@ body {
   width: 100%;
   height: 100%;
   border-radius: 6px;
+  transition: all 0.2s;
 }
 
-.keyboard__key:hover {
+.keyboard__key:hover,
+.keyboard__key > span:hover {
   background-color: #000;
+  border-radius: 12px;
 }
 
 .keyboard__key_backspace,

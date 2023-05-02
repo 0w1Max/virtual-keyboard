@@ -1,13 +1,18 @@
-import { KEYS_ENG, KEYS_RUS, KEYS_CLASS } from './data.js';
+import { KEYS_ENG, KEYS_RUS } from './data.js';
 import { addKeyText, createKeyboard } from './create-keyboard.js';
 
-// const body = document.querySelector('body');
-let currentLang = KEYS_ENG;
+const myStorage = window.localStorage;
+
+if (myStorage.getItem('lang') === null) {
+  myStorage.setItem('lang', JSON.stringify(KEYS_ENG));
+}
+
+let currentLang = JSON.parse(myStorage.getItem('lang'));
 let isActiveCapsLock = false;
 let isActiveShift = false;
 let isActiveCtrl = false;
 
-createKeyboard(KEYS_ENG.lowerCase);
+createKeyboard(currentLang.lowerCase);
 
 const getAllKeys = (keys) => {
   const result = [];
@@ -69,17 +74,16 @@ const activateShift = () => {
 };
 
 const changeCurrentLang = () => {
-  switch (currentLang) {
-    case KEYS_ENG:
-      currentLang = KEYS_RUS;
-      console.log('KEYS_ENG -> KEYS_RUS');
-      break;
-    case KEYS_RUS:
-      currentLang = KEYS_ENG;
-      console.log('KEYS_RUS -> KEYS_ENG');
-      break;
-    default:
-      currentLang = KEYS_ENG;
+  if (JSON.stringify(currentLang) === JSON.stringify(KEYS_ENG)) {
+    myStorage.removeItem('lang');
+    myStorage.setItem('lang', JSON.stringify(KEYS_RUS));
+    currentLang = JSON.parse(myStorage.getItem('lang'));
+    console.log('KEYS_ENG => KEYS_RUS');
+  } else {
+    myStorage.removeItem('lang');
+    myStorage.setItem('lang', JSON.stringify(KEYS_ENG));
+    currentLang = JSON.parse(myStorage.getItem('lang'));
+    console.log('KEYS_RUS => KEYS_ENG');
   }
 
   return currentLang;
@@ -139,4 +143,35 @@ const textInput = () => {
   });
 };
 
+const textRemove = () => {
+  const output = document.querySelector('.output-text');
+  const keyBackspace = document.querySelector('.keyboard__key_backspace');
+
+  keyBackspace.addEventListener('click', () => {
+    const text = document.querySelector('.output-text').value;
+    output.value = text.substr(0, text.length - 1);
+  });
+};
+
+const clickEnter = () => {
+  const output = document.querySelector('.output-text');
+  const keyEnter = document.querySelector('.keyboard__key_enter');
+
+  keyEnter.addEventListener('click', () => {
+    output.value += '\n';
+  });
+};
+
+const clickTab = () => {
+  const output = document.querySelector('.output-text');
+  const keyTab = document.querySelector('.keyboard__key_tab');
+
+  keyTab.addEventListener('click', () => {
+    output.value += '\u0009';
+  });
+};
+
 textInput();
+textRemove();
+clickEnter();
+clickTab();
