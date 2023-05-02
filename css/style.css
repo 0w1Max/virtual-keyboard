@@ -49,7 +49,7 @@ body {
   background-color: #3e596c;
   border-radius: 6px;
   cursor: pointer;
-  transition: all 0.9s;
+  transition: all 0.2s;
 }
 
 .keyboard__key > span {
