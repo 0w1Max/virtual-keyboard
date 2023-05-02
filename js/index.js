@@ -1,4 +1,4 @@
-import { KEYS_ENG, KEYS_RUS, KEYS_CLASS } from './data.js';
+import { KEYS_ENG, KEYS_RUS } from './data.js';
 import { addKeyText, createKeyboard } from './create-keyboard.js';
 
 // const body = document.querySelector('body');
