@@ -78,12 +78,10 @@ const changeCurrentLang = () => {
     myStorage.removeItem('lang');
     myStorage.setItem('lang', JSON.stringify(KEYS_RUS));
     currentLang = JSON.parse(myStorage.getItem('lang'));
-    console.log('KEYS_ENG => KEYS_RUS');
   } else {
     myStorage.removeItem('lang');
     myStorage.setItem('lang', JSON.stringify(KEYS_ENG));
     currentLang = JSON.parse(myStorage.getItem('lang'));
-    console.log('KEYS_RUS => KEYS_ENG');
   }
 
   return currentLang;
