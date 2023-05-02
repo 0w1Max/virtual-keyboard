@@ -146,10 +146,25 @@ const textInput = () => {
 const textRemove = () => {
   const output = document.querySelector('.output-text');
   const keyBackspace = document.querySelector('.keyboard__key_backspace');
+  const keyDel = document.querySelector('.keyboard__key_del');
 
   keyBackspace.addEventListener('click', () => {
     const text = document.querySelector('.output-text').value;
     output.value = text.substr(0, text.length - 1);
+  });
+
+  keyDel.addEventListener('click', () => {
+    const text = Array.from(document.querySelector('.output-text').value);
+    const start = output.selectionStart;
+    const end = output.selectionEnd;
+
+    if (start === end) {
+      text.splice(end, 1);
+    } else {
+      text.splice(start, end - start);
+    }
+
+    output.value = text.join('');
   });
 };
 
