@@ -120,14 +120,14 @@ changeLang();
 
 const textInput = () => {
   const output = document.querySelector('.output-text');
-  const keyText = [...document.querySelectorAll('.keyboard__key_main > span')];
+  const keyMainText = [...document.querySelectorAll('.keyboard__key_main > span')];
+  const keySpecialText = [...document.querySelectorAll('.keyboard__key_special > span')];
 
   document.addEventListener('keydown', (evt) => {
-    keyText.forEach((key) => {
-      const keyName = evt.key;
+    const keyName = evt.key;
 
-      output.focus();
-
+    output.focus();
+    keyMainText.forEach((key) => {
       if (keyName === key.textContent) {
         key.classList.add('active');
 
@@ -136,7 +136,68 @@ const textInput = () => {
     });
   });
 
-  keyText.forEach((key) => {
+  document.addEventListener('keydown', (evt) => {
+    const keyName = evt.key;
+
+    output.focus();
+    keySpecialText.forEach((key) => {
+      if (keyName === key.textContent) {
+        key.classList.add('active');
+
+        document.addEventListener('keyup', () => key.classList.remove('active'));
+      }
+
+      if (keyName === 'CapsLock' && key.textContent === 'Caps Lock') {
+        key.classList.add('active');
+
+        document.addEventListener('keyup', () => key.classList.remove('active'));
+      }
+
+      if (keyName === 'Meta' && key.textContent === 'Win') {
+        key.classList.add('active');
+
+        document.addEventListener('keyup', () => key.classList.remove('active'));
+      }
+
+      if (keyName === 'Control' && key.textContent === 'Ctrl') {
+        key.classList.add('active');
+
+        document.addEventListener('keyup', () => key.classList.remove('active'));
+      }
+
+      if (keyName === 'Delete' && key.textContent === 'Del') {
+        key.classList.add('active');
+
+        document.addEventListener('keyup', () => key.classList.remove('active'));
+      }
+
+      if (keyName === 'ArrowUp' && key.textContent === '↑') {
+        key.classList.add('active');
+
+        document.addEventListener('keyup', () => key.classList.remove('active'));
+      }
+
+      if (keyName === 'ArrowRight' && key.textContent === '→') {
+        key.classList.add('active');
+
+        document.addEventListener('keyup', () => key.classList.remove('active'));
+      }
+
+      if (keyName === 'ArrowDown' && key.textContent === '↓') {
+        key.classList.add('active');
+
+        document.addEventListener('keyup', () => key.classList.remove('active'));
+      }
+
+      if (keyName === 'ArrowLeft' && key.textContent === '←') {
+        key.classList.add('active');
+
+        document.addEventListener('keyup', () => key.classList.remove('active'));
+      }
+    });
+  });
+
+  keyMainText.forEach((key) => {
     key.addEventListener('click', () => {
       output.value += key.textContent;
     });
