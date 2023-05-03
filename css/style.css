@@ -1,0 +1,125 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 900px;
+  height: 100vh;
+  margin: 0 auto;
+}
+
+.output-text {
+  width: 930px;
+  height: 200px;
+  font-size: 24px;
+  border: 20px solid #1e2b34;
+}
+
+.keyboard {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  background-color: #8e9ea9;
+  border-radius: 0 0 12px 12px;
+}
+
+.keyboard__row {
+  display: flex;
+  gap: 10px;
+  justify-content: start;
+}
+
+.keyboard__key {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  color: #fff;
+  background-color: #3e596c;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.keyboard__key > span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.keyboard__key:hover,
+.keyboard__key > span:hover {
+  background-color: #000;
+  border-radius: 12px;
+}
+
+.keyboard__key_backspace,
+.keyboard__key_caps-lock,
+.keyboard__key_enter,
+.keyboard__key_shift {
+  width: 110px;
+}
+
+.keyboard__key_space {
+  width: 410px;
+}
+
+.keyboard__key_tab,
+.keyboard__key_backspace,
+.keyboard__key_caps-lock,
+.keyboard__key_enter,
+.keyboard__key_shift,
+.keyboard__key_del,
+.keyboard__key_ctrl,
+.keyboard__key_win,
+.keyboard__key_alt,
+.keyboard__key_space,
+.keyboard__key_up,
+.keyboard__key_right,
+.keyboard__key_down,
+.keyboard__key_left {
+  background-color: #1e2b34;
+}
+
+.keyboard__key_caps-lock::after {
+  content: '';
+  width: 7px;
+  height: 6px;
+  margin-right: 14px;
+  background-color: #ccc;
+  border-radius: 10px;
+}
+
+.keyboard__key_caps-lock.active::after {
+  background-color: rgb(15, 175, 0);
+}
+
+.keyboard__key > span.active {
+  background-color: #000;
+}
+
+.keyboard__key_caps-lock.active,
+.keyboard__key_shift.active,
+.keyboard__key_ctrl.active,
+.keyboard__key_alt.active {
+  background-color: #000;
+}
+
+.info__text {
+  font-size: 18px;
+}
